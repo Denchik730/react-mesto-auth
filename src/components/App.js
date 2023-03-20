@@ -10,6 +10,7 @@ import ApprovalPopup from './ApprovalPopup';
 import ImagePopup from './ImagePopup';
 import Register from './Register';
 import Login from './Login';
+import InfoTooltip from './InfoTooltip';
 
 import api from '../utils/api';
 
@@ -162,7 +163,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
-
+        <InfoTooltip/>
         <Header/>
         {/* <Register/> */}
         <Login/>

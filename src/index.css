@@ -60,6 +60,8 @@
 @import url(./blocks/popup/__place/popup__place.css);
 @import url(./blocks/popup/__place-image/popup__place-image.css);
 @import url(./blocks/popup/__place-descr/popup__place-descr.css);
+@import url(./blocks/popup/__info-tooltip-image/popup__info-tooltip-image.css);
+@import url(./blocks/popup/__title-form_type_infotooltip/popup__title-form_type_infotooltip.css);
 
 @import url(./blocks/register/__form/register__form.css);
 @import url(./blocks/register/__title-form/register__title-form.css);
