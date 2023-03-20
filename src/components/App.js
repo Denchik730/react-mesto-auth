@@ -9,6 +9,7 @@ import AddPlacePopup from './AddPlacePopup';
 import ApprovalPopup from './ApprovalPopup';
 import ImagePopup from './ImagePopup';
 import Register from './Register';
+import Login from './Login';
 
 import api from '../utils/api';
 
@@ -163,7 +164,8 @@ function App() {
       <div className='page'>
 
         <Header/>
-        <Register/>
+        {/* <Register/> */}
+        <Login/>
         {/* <Main
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}

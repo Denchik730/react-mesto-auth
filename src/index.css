@@ -68,3 +68,9 @@
 @import url(./blocks/register/__submit-button/register__submit-button.css);
 @import url(./blocks/register/__link-login/register__link-login.css);
 
+@import url(./blocks/login/__form/login__form.css);
+@import url(./blocks/login/__title-form/login__title-form.css);
+@import url(./blocks/login/__input/login__input.css);
+@import url(./blocks/login/__input-error/login__input-error.css);
+@import url(./blocks/login/__submit-button/login__submit-button.css);
+
