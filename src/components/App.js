@@ -8,6 +8,7 @@ import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import ApprovalPopup from './ApprovalPopup';
 import ImagePopup from './ImagePopup';
+import Register from './Register';
 
 import api from '../utils/api';
 
@@ -162,8 +163,8 @@ function App() {
       <div className='page'>
 
         <Header/>
-
-        <Main
+        <Register/>
+        {/* <Main
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
@@ -172,9 +173,9 @@ function App() {
           onCardLike={handleCardLike}
           onCardDelete={handleDeleteBtnClick}
           cards={cards}
-          />
-
-        <Footer/>
+          /> */}
+{/*
+        <Footer/> */}
 
         <EditProfilePopup isLoadingRequest={loadingPopupRequest} onUpdateUser={handleUpdateUser} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
 

@@ -1,7 +1,11 @@
 function Header() {
   return (
     <header className="header page__header">
-      <div className="logo header__logo"/>
+      <div className="header__wrapper">
+        <div className="logo header__logo"/>
+        <a className="header__link" href="#">Войти</a>
+      </div>
+
     </header>
   );
 }
