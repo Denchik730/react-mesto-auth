@@ -15,6 +15,7 @@
 @import url(./blocks/header/__logo/header__logo.css);
 @import url(./blocks/header/__wrapper/header__wrapper.css);
 @import url(./blocks/header/__link/header__link.css);
+@import url(./blocks/header/__wrapper-links/header__wrapper-links..css);
 
 @import url(./blocks/info/info.css);
 @import url(./blocks/info/__profile/info__profile.css);

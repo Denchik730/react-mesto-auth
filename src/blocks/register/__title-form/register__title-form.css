@@ -7,3 +7,9 @@
   text-align: center;
   color: #FFFFFF;
 }
+
+@media screen and (max-width: 425px) {
+  .register__title-form {
+    margin-top: 40px;
+  }
+}

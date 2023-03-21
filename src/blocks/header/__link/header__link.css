@@ -1,5 +1,4 @@
 .header__link {
-  margin-top: 6px;
 
   font-weight: 400;
   font-size: 18px;
@@ -7,4 +6,11 @@
   color: #FFFFFF;
 
   text-decoration: none;
+}
+
+@media screen and (max-width: 576px) {
+  .header__link {
+    margin-right: 30px;
+  }
+
 }

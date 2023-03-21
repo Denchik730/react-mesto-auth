@@ -1,6 +1,6 @@
 .register__input {
   margin: 0 auto;
-  min-width: 358px;
+  width: 358px;
   padding-bottom: 13px;
   box-sizing: border-box;
   height: 27px;
@@ -20,4 +20,16 @@
 
 .register__input:first-of-type {
   margin-top: 50px;
+}
+
+@media screen and (max-width: 425px) {
+  .register__input {
+    width: 100%;
+  }
+
+
+  .register__input:first-of-type {
+    margin-top: 40px;
+  }
+
 }

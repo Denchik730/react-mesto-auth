@@ -165,8 +165,8 @@ function App() {
       <div className='page'>
         <InfoTooltip/>
         <Header/>
-        {/* <Register/> */}
-        <Login/>
+        <Register/>
+        {/* <Login/> */}
         {/* <Main
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
