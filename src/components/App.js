@@ -11,6 +11,7 @@ import ImagePopup from './ImagePopup';
 import Register from './Register';
 import Login from './Login';
 import InfoTooltip from './InfoTooltip';
+import MenuMobile from './MenuMobile';
 
 import api from '../utils/api';
 
@@ -163,11 +164,13 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
+
         <InfoTooltip/>
+        {/* <MenuMobile/> */}
         <Header/>
-        <Register/>
+        {/* <Register/> */}
         {/* <Login/> */}
-        {/* <Main
+        <Main
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
@@ -176,9 +179,9 @@ function App() {
           onCardLike={handleCardLike}
           onCardDelete={handleDeleteBtnClick}
           cards={cards}
-          /> */}
-{/*
-        <Footer/> */}
+          />
+
+        <Footer/>
 
         <EditProfilePopup isLoadingRequest={loadingPopupRequest} onUpdateUser={handleUpdateUser} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
 

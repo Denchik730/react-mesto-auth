@@ -7,4 +7,10 @@
   text-align: center;
   color: #FFFFFF;
   text-decoration: none;
+  transition: opacity .5s;
+
+}
+
+.register__link-login:hover {
+  opacity: .6;
 }
