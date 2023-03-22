@@ -1,4 +1,4 @@
-.register__link-login {
+.auth__link-login {
   margin-top: 15px;
   padding-bottom: 20px;
   font-weight: 400;
@@ -11,6 +11,6 @@
 
 }
 
-.register__link-login:hover {
+.auth__link-login:hover {
   opacity: .6;
 }

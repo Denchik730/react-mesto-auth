@@ -1,4 +1,4 @@
-.register__title-form {
+.auth__title-form {
   margin-top: 60px;
   margin-bottom: 0;
   font-weight: 900;
@@ -9,7 +9,7 @@
 }
 
 @media screen and (max-width: 425px) {
-  .register__title-form {
+  .auth__title-form {
     margin-top: 40px;
   }
 }

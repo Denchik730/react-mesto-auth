@@ -1,10 +1,10 @@
-.login__form {
+.auth__form {
   display: flex;
   flex-direction: column;
 }
 
 @media screen and (max-width: 425px) {
-  .login__form {
+  .auth__form {
     padding: 0 30px;
   }
 }

@@ -8,11 +8,11 @@ function Header() {
       <div className="header__wrapper">
         <div className="logo header__logo"/>
         <div className="header__wrapper-links">
-          <p className="header__email">gabbas.denn@mail.ru</p>
+          {/* <p className="header__email">gabbas.denn@mail.ru</p> */}
           <a className="header__link" href="#">Войти</a>
-          <button
+          {/* <button
             className="header__hamburger"
-            type="button"/>
+            type="button"/> */}
         </div>
       </div>
     </header>

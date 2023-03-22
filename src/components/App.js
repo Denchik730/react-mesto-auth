@@ -168,9 +168,9 @@ function App() {
         <InfoTooltip/>
         {/* <MenuMobile/> */}
         <Header/>
-        {/* <Register/> */}
+        <Register/>
         {/* <Login/> */}
-        <Main
+        {/* <Main
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
@@ -179,9 +179,9 @@ function App() {
           onCardLike={handleCardLike}
           onCardDelete={handleDeleteBtnClick}
           cards={cards}
-          />
+          /> */}
 
-        <Footer/>
+        {/* <Footer/> */}
 
         <EditProfilePopup isLoadingRequest={loadingPopupRequest} onUpdateUser={handleUpdateUser} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
 
