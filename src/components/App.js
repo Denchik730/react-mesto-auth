@@ -32,7 +32,7 @@ function App() {
   const [loadingPopupRequest, setLoadingPopupRequest] = React.useState(false);
   const [willDeleteCard, setWillDeleteCard] = React.useState(null);
 
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(true);
 
   React.useEffect(() => {
     api.getAllNeededData()
@@ -170,7 +170,8 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
 
-        <Header/>
+        <Header
+          loggedIn={loggedIn}/>
         {/* <MenuMobile/> */}
 
 
@@ -209,10 +210,8 @@ function App() {
           }/>
 
           <Route path="/sign-up" element={
-            <ProtectedRoute
-              element={Register}
-            />}
-          />
+            <Register/>
+          }/>
 
           {/* <Route path="/" element={loggedIn ? <Navigate to="/" replace /> : <Navigate to="/sign-in" replace />} /> */}
 
