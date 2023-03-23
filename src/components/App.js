@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Routes, Route, Navigate } from 'react-router-dom';
+
 import Header from './Header';
 import Footer from './Footer';
 import Main from './Main';
@@ -12,6 +14,7 @@ import Register from './Register';
 import Login from './Login';
 import InfoTooltip from './InfoTooltip';
 import MenuMobile from './MenuMobile';
+import ProtectedRoute from './ProtectedRoute';
 
 import api from '../utils/api';
 
@@ -28,6 +31,8 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [loadingPopupRequest, setLoadingPopupRequest] = React.useState(false);
   const [willDeleteCard, setWillDeleteCard] = React.useState(null);
+
+  const [loggedIn, setLoggedIn] = React.useState(false);
 
   React.useEffect(() => {
     api.getAllNeededData()
@@ -165,23 +170,57 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
 
-        <InfoTooltip/>
-        {/* <MenuMobile/> */}
         <Header/>
-        <Register/>
-        {/* <Login/> */}
-        {/* <Main
-          onEditProfile={handleEditProfileClick}
-          onAddPlace={handleAddPlaceClick}
-          onEditAvatar={handleEditAvatarClick}
-          onApproval={handleApprovalClick}
-          onCardClick={handleCardClick}
-          onCardLike={handleCardLike}
-          onCardDelete={handleDeleteBtnClick}
-          cards={cards}
-          /> */}
+        {/* <MenuMobile/> */}
+
+
+        <Routes>
+
+          {/* <Route path="/" element={
+            <Main
+              onEditProfile={handleEditProfileClick}
+              onAddPlace={handleAddPlaceClick}
+              onEditAvatar={handleEditAvatarClick}
+              onApproval={handleApprovalClick}
+              onCardClick={handleCardClick}
+              onCardLike={handleCardLike}
+              onCardDelete={handleDeleteBtnClick}
+              cards={cards}
+              />
+          }/> */}
+
+          <Route path="/" element={
+            <ProtectedRoute
+              element={Main}
+              onEditProfile={handleEditProfileClick}
+              onAddPlace={handleAddPlaceClick}
+              onEditAvatar={handleEditAvatarClick}
+              onApproval={handleApprovalClick}
+              onCardClick={handleCardClick}
+              onCardLike={handleCardLike}
+              onCardDelete={handleDeleteBtnClick}
+              cards={cards}
+              loggedIn={loggedIn}
+              />}
+          />
+
+          <Route path="/sign-in" element={
+            <Login/>
+          }/>
+
+          <Route path="/sign-up" element={
+            <ProtectedRoute
+              element={Register}
+            />}
+          />
+
+          {/* <Route path="/" element={loggedIn ? <Navigate to="/" replace /> : <Navigate to="/sign-in" replace />} /> */}
+
+        </Routes>
 
         {/* <Footer/> */}
+
+        <InfoTooltip/>
 
         <EditProfilePopup isLoadingRequest={loadingPopupRequest} onUpdateUser={handleUpdateUser} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
 
