@@ -32,7 +32,7 @@ function App() {
   const [loadingPopupRequest, setLoadingPopupRequest] = React.useState(false);
   const [willDeleteCard, setWillDeleteCard] = React.useState(null);
 
-  const [loggedIn, setLoggedIn] = React.useState(true);
+  const [loggedIn, setLoggedIn] = React.useState(false);
 
   React.useEffect(() => {
     api.getAllNeededData()

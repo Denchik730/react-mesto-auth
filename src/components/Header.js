@@ -17,18 +17,18 @@ function Header(props) {
         <div className="logo header__logo"/>
         <Routes>
           <Route path="/sign-in" element={
-            <a href='#' className='header__link'>Регистрация</a>
+            <Link to="/sign-up" className='header__link'>Регистрация</Link>
           }/>
 
           <Route path="/sign-up" element={
-            <a href='#' className='header__link'>Войти</a>
+            <Link to="/sign-in" className='header__link'>Войти</Link>
           }/>
 
           <Route path="/" element={(
             <>
               <div className="header__wrapper-links">
                 <p className="header__email">gabbas.denn@mail.ru</p>
-                <a className="header__link" href="#">Выйти</a>
+                <Link to="/sign-in" className="header__link">Выйти</Link>
               </div>
               <button
                 className="header__hamburger"
