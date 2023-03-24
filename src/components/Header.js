@@ -27,7 +27,7 @@ function Header(props) {
           <Route path="/" element={(
             <>
               <div className="header__wrapper-links">
-                <p className="header__email">gabbas.denn@mail.ru</p>
+                <p className="header__email">{props.emailUser}</p>
                 <Link to="/sign-in" className="header__link">Выйти</Link>
               </div>
               <button

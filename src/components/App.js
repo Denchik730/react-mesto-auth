@@ -13,7 +13,6 @@ import ImagePopup from './ImagePopup';
 import Register from './Register';
 import Login from './Login';
 import InfoTooltip from './InfoTooltip';
-import MenuMobile from './MenuMobile';
 import ProtectedRoute from './ProtectedRoute';
 
 import api from '../utils/api';
@@ -33,6 +32,7 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [loadingPopupRequest, setLoadingPopupRequest] = React.useState(false);
   const [willDeleteCard, setWillDeleteCard] = React.useState(null);
+  const [emailUser, setEmailUser] = React.useState('');
 
   const [loggedIn, setLoggedIn] = React.useState(false);
 
@@ -45,8 +45,9 @@ function App() {
   const tokenCheck = () => {
     const jwt = localStorage.getItem('token');
       if (jwt) {
-        auth.getContent(jwt).then((res) => {
-         if (res){
+        auth.getContent(jwt).then((data) => {
+         if (data) {
+          setEmailUser(data.data.email);
           handleLogin();
           navigate("/", {replace: true})
         }
@@ -67,6 +68,7 @@ function App() {
 
   React.useEffect(() => {
     tokenCheck();
+
   }, [])
 
   const handleAddPlaceSubmit = (newCardData) => {
@@ -194,7 +196,8 @@ function App() {
       <div className='page'>
 
         <Header
-          loggedIn={loggedIn}/>
+          loggedIn={loggedIn}
+          emailUser={emailUser}/>
         {/* <MenuMobile/> */}
 
 
