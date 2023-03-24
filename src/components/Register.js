@@ -18,7 +18,6 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(values);
     const  {password, email} = values
     auth.register(password, email)
       .then(data => {

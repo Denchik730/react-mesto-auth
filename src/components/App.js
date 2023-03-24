@@ -34,6 +34,10 @@ function App() {
 
   const [loggedIn, setLoggedIn] = React.useState(false);
 
+  const handleLogin = () => {
+    setLoggedIn(true);
+}
+
   React.useEffect(() => {
     api.getAllNeededData()
       .then(data => {
@@ -206,7 +210,7 @@ function App() {
           />
 
           <Route path="/sign-in" element={
-            <Login/>
+            <Login handleLogin={handleLogin}/>
           }/>
 
           <Route path="/sign-up" element={
