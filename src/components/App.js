@@ -32,28 +32,15 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [loadingPopupRequest, setLoadingPopupRequest] = React.useState(false);
   const [willDeleteCard, setWillDeleteCard] = React.useState(null);
+
   const [emailUser, setEmailUser] = React.useState('');
+  const [isInfoToolTipPopupOpen, setIsInfoToolTipPopupOpen] = React.useState(false);
+  const [successRegister, setSuccessRegister] = React.useState(null);
+
 
   const [loggedIn, setLoggedIn] = React.useState(false);
 
   const navigate = useNavigate();
-
-  const handleLogin = () => {
-    setLoggedIn(true);
-  }
-
-  const tokenCheck = () => {
-    const jwt = localStorage.getItem('token');
-      if (jwt) {
-        auth.getContent(jwt).then((data) => {
-         if (data) {
-          setEmailUser(data.data.email);
-          handleLogin();
-          navigate("/", {replace: true})
-        }
-      });
-    }
-  }
 
   React.useEffect(() => {
     api.getAllNeededData()
@@ -67,9 +54,48 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    tokenCheck();
+    checkToken();
+  }, []);
 
-  }, [])
+  const handleIsLogged = () => {
+    setLoggedIn(true);
+  }
+
+  const checkToken = () => {
+    const jwt = localStorage.getItem('token');
+      if (jwt) {
+        auth.getContent(jwt).then((data) => {
+         if (data) {
+          setEmailUser(data.data.email);
+          handleIsLogged();
+          navigate("/", {replace: true})
+        }
+      });
+    }
+  }
+
+  const handleRegister = (password, email) => {
+    auth.register(password, email)
+    .then(data => {
+      navigate('/sign-in', {replace: true});
+    })
+  }
+
+  const handleLogin = (password, email) => {
+    auth.authorize(password, email)
+    .then(data => {
+      if (data.token){
+        handleIsLogged();
+        navigate('/', {replace: true});
+      }
+    })
+  }
+
+  const handleSignout = () => {
+    localStorage.removeItem('token');
+    setLoggedIn(false);
+    navigate('/sign-in', {replace: true});
+  }
 
   const handleAddPlaceSubmit = (newCardData) => {
     setLoadingPopupRequest(true);
@@ -197,7 +223,8 @@ function App() {
 
         <Header
           loggedIn={loggedIn}
-          emailUser={emailUser}/>
+          emailUser={emailUser}
+          handleSignout={handleSignout}/>
         {/* <MenuMobile/> */}
 
 
@@ -236,7 +263,8 @@ function App() {
           }/>
 
           <Route path="/sign-up" element={
-            <Register/>
+            <Register
+              handleRegister={handleRegister}/>
           }/>
 
           {/* <Route path="/" element={loggedIn ? <Navigate to="/" replace /> : <Navigate to="/sign-in" replace />} /> */}

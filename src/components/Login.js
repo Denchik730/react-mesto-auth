@@ -1,16 +1,10 @@
 import React from 'react';
 
-import { useNavigate } from 'react-router-dom';
-
 import { useForm } from '../hooks/useForm';
-
-import * as auth from '../utils/auth';
 
 const Login = (props) => {
 
-  const {values, handleChange, setValues} = useForm({});
-
-  const navigate = useNavigate();
+  const {values, handleChange} = useForm({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,14 +12,7 @@ const Login = (props) => {
     if (!password || !email){
       return;
     }
-    auth.authorize(password, email)
-      .then(data => {
-        if (data.token){
-          setValues({});
-          props.handleLogin();
-          navigate('/', {replace: true});
-        }
-      })
+    props.handleLogin(password, email);
   }
 
   return (

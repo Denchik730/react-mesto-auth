@@ -1,28 +1,18 @@
 import React from 'react';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { useForm } from '../hooks/useForm';
 
-import * as auth from '../utils/auth';
 
-const Register = () => {
+const Register = (props) => {
 
-  const {values, handleChange, setValues} = useForm({});
-
-  const navigate = useNavigate();
-
-  React.useEffect(() => {
-    setValues({})
-  }, []);
+  const {values, handleChange} = useForm({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const  {password, email} = values
-    auth.register(password, email)
-      .then(data => {
-        navigate('/sign-in', {replace: true});
-      })
+    props.handleRegister(password, email);
   }
 
   return (

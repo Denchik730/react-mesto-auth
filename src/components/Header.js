@@ -26,9 +26,9 @@ function Header(props) {
 
           <Route path="/" element={(
             <>
-              <div className="header__wrapper-links">
+              <div className="header__wrapper-info">
                 <p className="header__email">{props.emailUser}</p>
-                <Link to="/sign-in" className="header__link">Выйти</Link>
+                <button onClick={props.handleSignout} className="header__sign-out">Выйти</button>
               </div>
               <button
                 className="header__hamburger"
