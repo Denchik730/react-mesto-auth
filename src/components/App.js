@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -18,6 +18,8 @@ import ProtectedRoute from './ProtectedRoute';
 
 import api from '../utils/api';
 
+import * as auth from '../utils/auth';
+
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function App() {
@@ -34,9 +36,23 @@ function App() {
 
   const [loggedIn, setLoggedIn] = React.useState(false);
 
+  const navigate = useNavigate();
+
   const handleLogin = () => {
     setLoggedIn(true);
-}
+  }
+
+  const tokenCheck = () => {
+    const jwt = localStorage.getItem('token');
+      if (jwt) {
+        auth.getContent(jwt).then((res) => {
+         if (res){
+          handleLogin();
+          navigate("/", {replace: true})
+        }
+      });
+    }
+  }
 
   React.useEffect(() => {
     api.getAllNeededData()
@@ -49,6 +65,9 @@ function App() {
       .catch(err => console.log(err))
   }, []);
 
+  React.useEffect(() => {
+    tokenCheck();
+  }, [])
 
   const handleAddPlaceSubmit = (newCardData) => {
     setLoadingPopupRequest(true);
@@ -221,7 +240,7 @@ function App() {
 
         </Routes>
 
-        {/* <Footer/> */}
+        {loggedIn && <Footer/>}
 
         <InfoTooltip/>
 

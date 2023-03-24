@@ -17,8 +17,8 @@ export const register = (password, email) => {
     }
     return Promise.reject(`${response.status}`);
   })
-  .then((res) => {
-    return res;
+  .then((response) => {
+    return response;
   })
   .catch((err) => console.log(`Ошибка: ${err}`));
 };
@@ -46,6 +46,25 @@ export const authorize = (password, email) => {
       return response;
     }
   })
+  .catch((err) => console.log(`Ошибка: ${err}`));
+}
+
+export const getContent = (token) => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    }
+    return Promise.reject(`${response.status}`);
+  })
+  .then(data => data)
   .catch((err) => console.log(`Ошибка: ${err}`));
 }
 
