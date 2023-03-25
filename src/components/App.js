@@ -36,7 +36,7 @@ function App() {
   const [emailUser, setEmailUser] = React.useState('');
   const [isInfoToolTipPopupOpen, setIsInfoToolTipPopupOpen] = React.useState(false);
   const [successRegister, setSuccessRegister] = React.useState(null);
-
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
   const [loggedIn, setLoggedIn] = React.useState(false);
 
@@ -63,12 +63,20 @@ function App() {
 
   const checkToken = () => {
     const jwt = localStorage.getItem('token');
-      if (jwt) {
-        auth.getContent(jwt).then((data) => {
-         if (data) {
+    if (jwt) {
+      auth.checkToken(jwt).then((data) => {
+        if (data) {
           setEmailUser(data.data.email);
           handleIsLogged();
           navigate("/", {replace: true})
+        }
+      })
+      .catch((e) => {
+        if (e === 400) {
+          console.log(`Ошибка: ${e} - Токен не передан или передан не в том формате`)
+        }
+        if (e === 401) {
+          console.log(`Ошибка: ${e} - Переданный токен некорректен`)
         }
       });
     }
@@ -76,24 +84,44 @@ function App() {
 
   const handleRegister = (password, email) => {
     auth.register(password, email)
-    .then(data => {
-      navigate('/sign-in', {replace: true});
-    })
+      .then(data => {
+        setIsInfoToolTipPopupOpen(true);
+        setSuccessRegister(true);
+        navigate('/sign-in', {replace: true});
+      })
+      .catch(e => {
+        if (e === 400) {
+          console.log(`Ошибка: ${e} - некорректно заполнено одно из полей`)
+        }
+        setIsInfoToolTipPopupOpen(true);
+        setSuccessRegister(false);
+      })
   }
 
   const handleLogin = (password, email) => {
-    auth.authorize(password, email)
-    .then(data => {
-      if (data.token){
-        handleIsLogged();
-        navigate('/', {replace: true});
-      }
-    })
+    auth.login(password, email)
+      .then(data => {
+        if (data.token){
+          handleIsLogged();
+          setEmailUser(email);
+          navigate('/', {replace: true});
+        }
+      })
+      .catch((e) => {
+        if (e === 400) {
+          console.log(`Ошибка: ${e} - не передано одно из полей`)
+        }
+        if (e === 401) {
+          console.log(`Ошибка: ${e} - пользователь с email не найден`)
+        }
+      });
+
   }
 
   const handleSignout = () => {
     localStorage.removeItem('token');
     setLoggedIn(false);
+    setIsMobileMenuOpen(false);
     navigate('/sign-in', {replace: true});
   }
 
@@ -189,17 +217,24 @@ function App() {
     setIsApprovalPopupOpen(true);
   }
 
+  const handleMenuMobileClick = () => {
+    if (loggedIn) {
+      setIsMobileMenuOpen(!isMobileMenuOpen);
+    }
+  }
+
 
   const closeAllPopups = () => {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsApprovalPopupOpen(false);
+    setIsInfoToolTipPopupOpen(false);
 
     setSelectedCard(null);
   }
 
-  const isOpen = isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || selectedCard || willDeleteCard;
+  const isOpen = isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || selectedCard || willDeleteCard || isInfoToolTipPopupOpen;
 
   React.useEffect(() => {
     function closeEscape(evt) {
@@ -224,24 +259,11 @@ function App() {
         <Header
           loggedIn={loggedIn}
           emailUser={emailUser}
-          handleSignout={handleSignout}/>
-        {/* <MenuMobile/> */}
-
+          handleSignout={handleSignout}
+          handleMenuMobileClick={handleMenuMobileClick}
+          isMobileMenuOpen={isMobileMenuOpen}/>
 
         <Routes>
-
-          {/* <Route path="/" element={
-            <Main
-              onEditProfile={handleEditProfileClick}
-              onAddPlace={handleAddPlaceClick}
-              onEditAvatar={handleEditAvatarClick}
-              onApproval={handleApprovalClick}
-              onCardClick={handleCardClick}
-              onCardLike={handleCardLike}
-              onCardDelete={handleDeleteBtnClick}
-              cards={cards}
-              />
-          }/> */}
 
           <Route path="/" element={
             <ProtectedRoute
@@ -267,21 +289,41 @@ function App() {
               handleRegister={handleRegister}/>
           }/>
 
-          {/* <Route path="/" element={loggedIn ? <Navigate to="/" replace /> : <Navigate to="/sign-in" replace />} /> */}
+          <Route path="*" element={loggedIn ? <Navigate to="/" replace /> : <Navigate to="/sign-in" replace />} />
 
         </Routes>
 
         {loggedIn && <Footer/>}
 
-        <InfoTooltip/>
+        <InfoTooltip
+          isOpen={isInfoToolTipPopupOpen}
+          onClose={closeAllPopups}
+          isSuccessRegister={successRegister}/>
 
-        <EditProfilePopup isLoadingRequest={loadingPopupRequest} onUpdateUser={handleUpdateUser} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
+        <EditProfilePopup
+          isLoadingRequest={loadingPopupRequest}
+          onUpdateUser={handleUpdateUser}
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups} />
 
-        <AddPlacePopup isLoadingRequest={loadingPopupRequest} onAddPlace={handleAddPlaceSubmit} isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
+        <AddPlacePopup
+          isLoadingRequest={loadingPopupRequest}
+          onAddPlace={handleAddPlaceSubmit}
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups} />
 
-        <EditAvatarPopup isLoadingRequest={loadingPopupRequest} onUpdateAvatar={handleUpdateAvatar} isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
+        <EditAvatarPopup
+          isLoadingRequest={loadingPopupRequest}
+          onUpdateAvatar={handleUpdateAvatar}
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups} />
 
-        <ApprovalPopup card={willDeleteCard} isLoadingRequest={loadingPopupRequest} onDeleteCard={handleCardDelete} isOpen={isApprovalPopupOpen} onClose={closeAllPopups}></ApprovalPopup>
+        <ApprovalPopup
+          card={willDeleteCard}
+          isLoadingRequest={loadingPopupRequest}
+          onDeleteCard={handleCardDelete}
+          isOpen={isApprovalPopupOpen}
+          onClose={closeAllPopups}/>
 
         <ImagePopup
           card={selectedCard}

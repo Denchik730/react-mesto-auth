@@ -15,15 +15,14 @@ export const register = (password, email) => {
     if (response.ok) {
       return response.json();
     }
-    return Promise.reject(`${response.status}`);
+    return Promise.reject(response.status);
   })
   .then((response) => {
     return response;
   })
-  .catch((err) => console.log(`Ошибка: ${err}`));
 };
 
-export const authorize = (password, email) => {
+export const login = (password, email) => {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     headers: {
@@ -38,7 +37,7 @@ export const authorize = (password, email) => {
     if (response.ok) {
       return response.json();
     }
-    return Promise.reject(`${response.status}`);
+    return Promise.reject(response.status);
   })
   .then((response) => {
     if (response.token) {
@@ -46,10 +45,9 @@ export const authorize = (password, email) => {
       return response;
     }
   })
-  .catch((err) => console.log(`Ошибка: ${err}`));
 }
 
-export const getContent = (token) => {
+export const checkToken = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
@@ -62,29 +60,7 @@ export const getContent = (token) => {
     if (response.ok) {
       return response.json();
     }
-    return Promise.reject(`${response.status}`);
+    return Promise.reject(response.status);
   })
   .then(data => data)
-  .catch((err) => console.log(`Ошибка: ${err}`));
 }
-
-// // отправляем запрос на роут аутентификации
-// fetсh('https://api.mywebsite.com/signin', {
-//   method: 'POST',
-//   body: JSON.stringify({
-//     email: 'stasbasov@yandex.ru',
-//     password: 'StasBasov1989'
-//   })
-// })
-// .then(res => res.json())
-// .then((data) => {
-//   // сохраняем токен
-//   localStorage.setItem('token', data.token);
-// });
-
-// fetch('https://api.mywebsite.com/posts', {
-//   method: 'GET',
-//   headers: {
-//     authorization: `Bearer ${localStorage.getItem('token')}`
-//   }
-// });

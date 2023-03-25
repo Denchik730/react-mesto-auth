@@ -1,10 +1,9 @@
-import { Link } from 'react-router-dom';
 
-const MenuMobile = () => {
+const MenuMobile = (props) => {
   return (
-    <section className="menu-mobile">
-      <h2 className="menu-mobile__email">gabbas.denn@mail.ru</h2>
-      <Link to="/sign-in" className="menu-mobile__sign-out">Выйти</Link>
+    <section className={`menu-mobile ${props.isMobileMenuOpen && 'menu-mobile_opened'}`}>
+      <h2 className="menu-mobile__email">{props.emailUser}</h2>
+      <button onClick={props.handleSignout} className="menu-mobile__sign-out">Выйти</button>
     </section>
   );
 }

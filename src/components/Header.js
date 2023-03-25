@@ -8,11 +8,12 @@ import hamburger from '../images/hamburger.svg'
 
 function Header(props) {
 
-  const isMobileMenuOpen = false;
-
   return (
     <header className="header page__header">
-      {/* <MenuMobile/> */}
+      <MenuMobile
+        emailUser={props.emailUser}
+        handleSignout={props.handleSignout}
+        isMobileMenuOpen={props.isMobileMenuOpen}/>
       <div className="header__wrapper">
         <div className="logo header__logo"/>
         <Routes>
@@ -33,9 +34,10 @@ function Header(props) {
               <button
                 className="header__hamburger"
                 type="button"
+                onClick={props.handleMenuMobileClick}
                 style={{
                   backgroundImage: `url(${
-                    isMobileMenuOpen ? closeMenuIcon : hamburger
+                    props.isMobileMenuOpen ? closeMenuIcon : hamburger
                   })`,
                 }}/>
             </>
