@@ -1,7 +1,18 @@
 export const BASE_URL = 'https://auth.nomoreparties.co';
 
+const checkResponse = (response) => {
+  if (response.ok) {
+    return response.json();
+  }
+  return Promise.reject(response.status);
+}
+
+const request = (baseUrl, endpoint, options) => {
+  return fetch(`${baseUrl}/${endpoint}`, options).then(checkResponse);
+}
+
 export const register = (password, email) => {
-  return fetch(`${BASE_URL}/signup`, {
+  return request(BASE_URL, 'signup',{
     method: 'POST',
     headers: {
       "Content-Type": "application/json"
@@ -10,12 +21,6 @@ export const register = (password, email) => {
       password: password,
       email: email,
     })
-  })
-  .then((response) => {
-    if (response.ok) {
-      return response.json();
-    }
-    return Promise.reject(response.status);
   })
   .then((response) => {
     return response;
@@ -23,7 +28,7 @@ export const register = (password, email) => {
 };
 
 export const login = (password, email) => {
-  return fetch(`${BASE_URL}/signin`, {
+  return request(BASE_URL, 'signin', {
     method: 'POST',
     headers: {
       "Content-Type": "application/json"
@@ -32,12 +37,6 @@ export const login = (password, email) => {
       password: password,
       email: email,
     })
-  })
-  .then((response) => {
-    if (response.ok) {
-      return response.json();
-    }
-    return Promise.reject(response.status);
   })
   .then((response) => {
     if (response.token) {
@@ -48,19 +47,13 @@ export const login = (password, email) => {
 }
 
 export const checkToken = (token) => {
-  return fetch(`${BASE_URL}/users/me`, {
+  return request(BASE_URL, 'users/me', {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
     }
-  })
-  .then(response => {
-    if (response.ok) {
-      return response.json();
-    }
-    return Promise.reject(response.status);
   })
   .then(data => data)
 }
