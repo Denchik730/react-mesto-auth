@@ -31,8 +31,8 @@ const Popup = ({ isOpen, name, onClose, children, isWithContainer }) => {
       >
       <div className={`${isWithContainer ? 'popup__container': ''} popup__container-${name}`}>
         {children}
-        <button className="popup__close" type="button" onClick={onClose} />
       </div>
+      <button className="popup__close" type="button" onClick={onClose} />
     </section>
   );
 };

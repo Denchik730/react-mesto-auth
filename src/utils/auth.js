@@ -5,11 +5,11 @@ const checkResponse = (response) => {
     return response.json();
   }
   return Promise.reject(response.status);
-}
+};
 
 const request = (baseUrl, endpoint, options) => {
   return fetch(`${baseUrl}/${endpoint}`, options).then(checkResponse);
-}
+};
 
 export const register = (password, email) => {
   return request(BASE_URL, 'signup',{
@@ -44,7 +44,7 @@ export const login = (password, email) => {
       return response;
     }
   })
-}
+};
 
 export const checkToken = (token) => {
   return request(BASE_URL, 'users/me', {
@@ -56,4 +56,4 @@ export const checkToken = (token) => {
     }
   })
   .then(data => data)
-}
+};
