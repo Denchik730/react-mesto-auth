@@ -6,6 +6,6 @@ const MenuMobile = (props) => {
       <button onClick={props.handleSignout} className="menu-mobile__sign-out">Выйти</button>
     </section>
   );
-}
+};
 
 export default MenuMobile;

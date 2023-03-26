@@ -22,11 +22,9 @@ import * as auth from "../utils/auth";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function App() {
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
-    React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
-    React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isApprovalPopupOpen, setIsApprovalPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState({});
@@ -35,8 +33,7 @@ function App() {
   const [willDeleteCard, setWillDeleteCard] = React.useState(null);
 
   const [emailUser, setEmailUser] = React.useState("");
-  const [isInfoToolTipPopupOpen, setIsInfoToolTipPopupOpen] =
-    React.useState(false);
+  const [isInfoToolTipPopupOpen, setIsInfoToolTipPopupOpen] = React.useState(false);
   const [successRegister, setSuccessRegister] = React.useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
@@ -78,9 +75,7 @@ function App() {
         })
         .catch((e) => {
           if (e === 400) {
-            console.log(
-              `Ошибка: ${e} - Токен не передан или передан не в том формате`
-            );
+            console.log(`Ошибка: ${e} - Токен не передан или передан не в том формате`);
           }
           if (e === 401) {
             console.log(`Ошибка: ${e} - Переданный токен некорректен`);
@@ -250,29 +245,6 @@ function App() {
     setSelectedCard(null);
   };
 
-  const isOpen =
-    isEditAvatarPopupOpen ||
-    isEditProfilePopupOpen ||
-    isAddPlacePopupOpen ||
-    selectedCard ||
-    willDeleteCard ||
-    isInfoToolTipPopupOpen;
-
-  React.useEffect(() => {
-    function closeEscape(evt) {
-      if (evt.key === `Escape`) {
-        closeAllPopups();
-      }
-    }
-
-    if (isOpen) {
-      document.addEventListener("keydown", closeEscape);
-    }
-
-    return () => {
-      document.removeEventListener("keydown", closeEscape);
-    };
-  }, [isOpen]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

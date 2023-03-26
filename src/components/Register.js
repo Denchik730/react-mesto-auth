@@ -13,7 +13,7 @@ const Register = (props) => {
     e.preventDefault();
     const  {password, email} = values
     props.handleRegister(password, email);
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit} className="auth__form">

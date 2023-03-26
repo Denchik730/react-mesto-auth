@@ -19,7 +19,7 @@ function AddPlacePopup({isOpen, onClose, onAddPlace, isLoadingRequest}) {
       link: values.link,
     });
 
-  }
+  };
 
   return (
     <PopupWithForm
