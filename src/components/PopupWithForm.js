@@ -21,11 +21,6 @@ function PopupWithForm({name, title, buttonTitle, isOpen, onClose, children, onS
           {buttonTitle}
         </button>
       </form>
-      <button
-        onClick={onClose}
-        type="button"
-        aria-label="Закрыть"
-        className="popup__close"/>
     </Popup>
   );
 }

@@ -10,11 +10,6 @@ function ImagePopup({card, onClose}) {
           alt={`Изображение ${card ? card.name : ''}`}/>
         <figcaption className="popup__place-descr">{card ? card.name : ''}</figcaption>
       </figure>
-      <button
-        onClick={onClose}
-        type="button"
-        aria-label="Закрыть"
-        className="popup__close"/>
     </Popup>
   );
 }
