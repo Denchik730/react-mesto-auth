@@ -4,7 +4,7 @@
 
 ## Превью:
 
-![www_screencapture_com_2023-3-29_16_31 (2)](https://user-images.githubusercontent.com/102176847/228555331-510247c9-cd83-4353-be6a-7b19f10eb092.gif)
+![www_screencapture_com_2023-3-29_16_31 (1)](https://user-images.githubusercontent.com/102176847/228556365-c40d8c55-6ae0-4016-aec9-a72551192f2a.gif)
 
 ## Описание: данный проект решает такие проблемы современности как:
 
