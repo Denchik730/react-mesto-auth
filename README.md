@@ -43,12 +43,6 @@
 
 1. Сайт размещен на хостинге GitHub Pages. Перейдите по ссылке https://denchik730.github.io/react-mesto-auth/
 
-## Макеты в Figma:
-* [Проектная работа №6 (макет)](https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6?node-id=0-1&t=wZtkaf5E5Sy9QJX9-0) 
-
-## Чеклисты:
-* [Проектная работа №6 (чеклист)](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-6.pdf) 
-
 ## Планы доработки:
 
 - Проверить код на кроссбраузерность и дописать все вендорные префиксы;
