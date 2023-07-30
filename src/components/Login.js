@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import { useForm } from "../hooks/useForm";
+import { useForm } from '../hooks/useForm';
 
 const Login = (props) => {
   const { values, handleChange } = useForm({});
@@ -26,7 +26,7 @@ const Login = (props) => {
         placeholder="Email"
         minLength="2"
         maxLength="30"
-        value={values.email || ""}
+        value={values.email || ''}
         onChange={handleChange}
       />
       <span className="auth__input-error email-login-input-error"></span>
@@ -37,7 +37,7 @@ const Login = (props) => {
         type="password"
         className="auth__input"
         placeholder="Пароль"
-        value={values.password || ""}
+        value={values.password || ''}
         onChange={handleChange}
       />
       <span className="auth__input-error password-login-input-error"></span>
